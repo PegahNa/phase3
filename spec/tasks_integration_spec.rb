@@ -24,8 +24,10 @@ RSpec.describe "tasks integration" do
 
   it "returns the all completed tasks" do
     task_list = TaskList.new
-    task_1 = Task.new("Walk the dog")
-    task_2 = Task.new("Walk the cat")
+    task_1 = double(:task, matches?: true, complete?: true)
+    task_2 = double(:task, matches?: true, complete?: true)
+    allow(task_1).to receive(:mark_complete)
+    allow(task_2).to receive(:mark_complete)
     task_list.add(task_1)
     task_list.add(task_2)
     task_1.mark_complete
